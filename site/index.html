@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurança Digital Sênior - Navegue com Confiança</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Níveis de tamanho de texto dinâmico */
+        .text-size-1 { font-size: 1rem; }      /* Normal */
+        .text-size-2 { font-size: 1.25rem; }   /* Grande */
+        .text-size-3 { font-size: 1.5rem; }    /* Muito Grande */
+        .text-size-4 { font-size: 1.75rem; }   /* Gigante */
+
+        .text-size-1 .heading-xl { font-size: 2rem; }
+        .text-size-2 .heading-xl { font-size: 2.25rem; }
+        .text-size-3 .heading-xl { font-size: 2.75rem; }
+        .text-size-4 .heading-xl { font-size: 3.25rem; }
+
+        .text-size-1 .heading-lg { font-size: 1.5rem; }
+        .text-size-2 .heading-lg { font-size: 1.75rem; }
+        .text-size-3 .heading-lg { font-size: 2rem; }
+        .text-size-4 .heading-lg { font-size: 2.25rem; }
+
+        /* Estilo de Alto Contraste (Amarelo e Preto) */
+        body.theme-contrast {
+            background-color: #000000 !important;
+            color: #FFFF00 !important;
+        }
+
+        body.theme-contrast .bg-card {
+            background-color: #121212 !important;
+            border: 3px solid #FFFF00 !important;
+            color: #FFFF00 !important;
+        }
+
+        body.theme-contrast .bg-accent {
+            background-color: #FFFF00 !important;
+            color: #000000 !important;
+            border: 2px solid #FFFFFF !important;
+        }
+
+        body.theme-contrast button {
+            border: 2px solid #FFFF00 !important;
+        }
+
+        body.theme-contrast .text-muted {
+            color: #FFFFFF !important;
+        }
+
+        /* Estilo Modo Escuro Padrão */
+        body.theme-dark {
+            background-color: #0F172A;
+            color: #F8FAFC;
+        }
+
+        body.theme-dark .bg-card {
+            background-color: #1E293B;
+            border-color: #334155;
+            color: #F8FAFC;
+        }
+
+        body.theme-dark .text-muted {
+            color: #94A3B8;
+        }
+
+        /* Foco Visível para Navegação Acessível */
+        *:focus-visible {
+            outline: 4px solid #F59E0B !important;
+            outline-offset: 4px !important;
+        }
+
+        /* Sombra e Efeitos de Toque Ampliados */
+        .accessible-btn {
+            min-height: 54px;
+            min-width: 54px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .accessible-btn:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-full flex flex-col text-size-2 transition-all" id="app-body">
+
+    <!-- Barra Superior de Ferramentas de Acessibilidade -->
+    <header class="sticky top-0 z-50 bg-blue-900 text-white shadow-xl border-b-4 border-amber-400">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-shield-halved text-amber-400 text-3xl" aria-hidden="true"></i>
+                <span class="font-extrabold tracking-wide text-xl md:text-2xl">Segurança Digital Sênior</span>
+            </div>
+
+            <!-- Controles de Acessibilidade -->
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- Controle de Tamanho de Letra -->
+                <div class="flex items-center bg-blue-950 rounded-xl p-1 border border-blue-700">
+                    <span class="text-xs px-2 font-bold text-amber-300 uppercase hidden sm:inline">Letra:</span>
+                    <button onclick="changeFontSize(-1)" class="accessible-btn px-3 py-1 bg-blue-800 hover:bg-blue-700 text-white font-black rounded-lg text-lg" title="Diminuir texto" aria-label="Diminuir tamanho do texto">
+                        A-
+                    </button>
+                    <span id="font-size-label" class="px-3 font-bold text-amber-400">Normal</span>
+                    <button onclick="changeFontSize(1)" class="accessible-btn px-3 py-1 bg-blue-800 hover:bg-blue-700 text-white font-black rounded-lg text-lg" title="Aumentar texto" aria-label="Aumentar tamanho do texto">
+                        A+
+                    </button>
+                </div>
+
+                <!-- Controle de Contraste -->
+                <div class="flex items-center bg-blue-950 rounded-xl p-1 border border-blue-700">
+                    <button onclick="toggleTheme('light')" class="accessible-btn px-3 py-1 text-white hover:bg-blue-800 rounded-lg" title="Modo Claro" aria-label="Ativar tema claro">
+                        <i class="fa-solid fa-sun text-yellow-300"></i>
+                    </button>
+                    <button onclick="toggleTheme('dark')" class="accessible-btn px-3 py-1 text-white hover:bg-blue-800 rounded-lg" title="Modo Escuro" aria-label="Ativar tema escuro">
+                        <i class="fa-solid fa-moon text-blue-200"></i>
+                    </button>
+                    <button onclick="toggleTheme('contrast')" class="accessible-btn px-3 py-1 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-300" title="Alto Contraste (Amarelo e Preto)" aria-label="Ativar alto contraste">
+                        <i class="fa-solid fa-eye mr-1"></i> Alto Contraste
+                    </button>
+                </div>
+
+                <!-- Botão Parar Leitura de Voz -->
+                <button id="stop-speech-btn" onclick="stopSpeech()" class="hidden accessible-btn px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl animate-pulse" aria-label="Parar leitura de áudio">
+                    <i class="fa-solid fa-volume-xmark mr-2"></i> Parar Voz
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 space-y-8">
+
+        <!-- Boas-vindas e Leitura Global -->
+        <section class="bg-card bg-white rounded-3xl p-6 md:p-8 shadow-lg border-2 border-slate-200 relative overflow-hidden">
+            <div class="max-w-3xl space-y-4">
+                <div class="inline-flex items-center gap-2 bg-amber-100 text-amber-900 px-4 py-2 rounded-full font-bold text-sm md:text-base border border-amber-300">
+                    <i class="fa-solid fa-heart text-red-500"></i> Espaço feito para você aprender sem medo
+                </div>
+                <h1 class="heading-xl font-extrabold text-blue-950 leading-tight">
+                    Aprenda a navegar na internet com total segurança
+                </h1>
+                <p class="text-muted text-slate-700 leading-relaxed">
+                    Aqui você encontra explicações simples, em letras grandes e com opção de ouvir por áudio. Não passe dúvidas nem caia em golpes!
+                </p>
+                
+                <div class="pt-2 flex flex-wrap gap-4">
+                    <button onclick="speakText('Bem vindo ao Guia de Segurança Digital Sênior. Aqui você aprenderá a reconhecer golpes no WhatsApp, Pix, senhas e compras na internet de forma fácil e segura.')" class="accessible-btn bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-4 rounded-2xl shadow-md text-lg gap-3">
+                        <i class="fa-solid fa-volume-high text-2xl"></i> Ouvir Boas-Vindas
+                    </button>
+
+                    <a href="#simulador" class="accessible-btn bg-amber-500 hover:bg-amber-600 text-blue-950 font-extrabold px-6 py-4 rounded-2xl shadow-md text-lg gap-3">
+                        <i class="fa-solid fa-gamepad text-2xl"></i> Testar Seus Conhecimentos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Barra de Busca de Dicas -->
+        <section class="space-y-4">
+            <label for="search-input" class="block font-bold heading-lg text-slate-800">
+                <i class="fa-solid fa-magnifying-glass text-blue-600 mr-2"></i> Qual assunto você quer procurar?
+            </label>
+            <div class="relative">
+                <input type="text" id="search-input" onkeyup="filterTips()" placeholder="Exemplo: Pix, WhatsApp, Senha, Cartão..." class="w-full p-5 pl-14 text-xl rounded-2xl border-3 border-blue-400 bg-white shadow-md focus:border-amber-500 focus:ring-2 focus:ring-amber-400 text-slate-900" aria-label="Digite um assunto para buscar dicas de segurança">
+                <i class="fa-solid fa-search absolute left-5 top-1/2 -translate-y-1/2 text-2xl text-slate-400" aria-hidden="true"></i>
+            </div>
+        </section>
+
+        <!-- Filtros por Categoria -->
+        <section class="space-y-3">
+            <h2 class="font-bold text-xl text-slate-800">Categorias de Assuntos:</h2>
+            <div class="flex flex-wrap gap-3" id="category-buttons">
+                <button onclick="selectCategory('todos')" class="category-btn accessible-btn px-5 py-3 rounded-2xl font-bold bg-blue-900 text-white shadow-md border-2 border-blue-900" data-cat="todos">
+                    <i class="fa-solid fa-list mr-2"></i> Todos os Tópicos
+                </button>
+                <button onclick="selectCategory('whatsapp')" class="category-btn accessible-btn px-5 py-3 rounded-2xl font-bold bg-white text-slate-800 shadow-md border-2 border-slate-300 hover:border-emerald-500" data-cat="whatsapp">
+                    <i class="fa-brands fa-whatsapp text-emerald-600 mr-2 text-2xl"></i> WhatsApp & Redes
+                </button>
+                <button onclick="selectCategory('pix')" class="category-btn accessible-btn px-5 py-3 rounded-2xl font-bold bg-white text-slate-800 shadow-md border-2 border-slate-300 hover:border-teal-500" data-cat="pix">
+                    <i class="fa-solid fa-money-bill-transfer text-teal-600 mr-2 text-2xl"></i> Pix & Bancos
+                </button>
+                <button onclick="selectCategory('senhas')" class="category-btn accessible-btn px-5 py-3 rounded-2xl font-bold bg-white text-slate-800 shadow-md border-2 border-slate-300 hover:border-purple-500" data-cat="senhas">
+                    <i class="fa-solid fa-key text-purple-600 mr-2 text-2xl"></i> Senhas Seguras
+                </button>
+                <button onclick="selectCategory('compras')" class="category-btn accessible-btn px-5 py-3 rounded-2xl font-bold bg-white text-slate-800 shadow-md border-2 border-slate-300 hover:border-amber-500" data-cat="compras">
+                    <i class="fa-solid fa-cart-shopping text-amber-600 mr-2 text-2xl"></i> Compras Online
+                </button>
+            </div>
+        </section>
+
+        <!-- Lista de Cartões com Dicas -->
+        <section class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h2 class="heading-lg font-extrabold text-blue-950">Dicas Práticas de Segurança</h2>
+                <span id="tips-count" class="font-bold text-slate-600 bg-slate-200 px-3 py-1 rounded-full text-base">Mostrando todas</span>
+            </div>
+
+            <div id="tips-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Os cards serão injetados dinamicamente via JS para garantir modularidade -->
+            </div>
+        </section>
+
+        <!-- Simulador Interativo: É Golpe ou Seguro? -->
+        <section id="simulador" class="bg-card bg-amber-50 rounded-3xl p-6 md:p-8 shadow-xl border-4 border-amber-300 space-y-6">
+            <div class="flex items-center gap-3 border-b-2 border-amber-200 pb-4">
+                <i class="fa-solid fa-user-shield text-amber-600 text-4xl"></i>
+                <div>
+                    <h2 class="heading-lg font-black text-amber-950">Treinamento: É Golpe ou É Seguro?</h2>
+                    <p class="text-slate-700">Leia a situação abaixo e toque na resposta certa para praticar!</p>
+                </div>
+            </div>
+
+            <div id="quiz-box" class="space-y-6 bg-white p-6 rounded-2xl border-2 border-amber-200 shadow-sm">
+                <!-- Conteúdo do Quiz será carregado via JavaScript -->
+            </div>
+        </section>
+
+        <!-- Seção de Emergência / Preciso de Ajuda -->
+        <section class="bg-card bg-red-50 rounded-3xl p-6 md:p-8 shadow-lg border-2 border-red-300 space-y-6">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-exclamation text-red-600 text-4xl"></i>
+                <h2 class="heading-lg font-black text-red-950">Acha que caiu em um golpe? O que fazer agora:</h2>
+            </div>
+
+            <ol class="list-decimal list-inside space-y-3 font-semibold text-slate-800 leading-relaxed text-lg">
+                <li class="p-3 bg-white rounded-xl border border-red-200"><strong>Ligue imediatamente para o seu banco:</strong> Peça o bloqueio temporário do Pix, cartão de crédito ou conta bancária.</li>
+                <li class="p-3 bg-white rounded-xl border border-red-200"><strong>Troque suas senhas:</strong> Mude a senha do seu e-mail e das redes sociais em um aparelho seguro.</li>
+                <li class="p-3 bg-white rounded-xl border border-red-200"><strong>Faça um Boletim de Ocorrência (B.O.):</strong> Pode ser feito pela internet no site da Polícia Civil do seu Estado.</li>
+                <li class="p-3 bg-white rounded-xl border border-red-200"><strong>Avise parentes e amigos:</strong> Alerte que seu nome ou número pode estar sendo usado por golpistas.</li>
+            </ol>
+
+            <div class="pt-4 flex flex-wrap gap-4">
+                <a href="tel:190" class="accessible-btn bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 rounded-2xl shadow-md text-xl gap-3">
+                    <i class="fa-solid fa-phone text-2xl"></i> Ligar Polícia (190)
+                </a>
+                <button onclick="openHelpModal()" class="accessible-btn bg-slate-800 hover:bg-slate-900 text-white font-extrabold px-6 py-4 rounded-2xl shadow-md text-xl gap-3">
+                    <i class="fa-solid fa-headset text-2xl"></i> Ver Telefones Úteis
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé Acessível -->
+    <footer class="bg-slate-900 text-white mt-12 py-8 border-t-4 border-amber-400">
+        <div class="max-w-6xl mx-auto px-4 text-center space-y-4">
+            <p class="font-bold text-lg">Guia de Segurança Digital Sênior - Feito com carinho para a sua proteção.</p>
+            <p class="text-slate-400 text-sm">Lembre-se: Nenhum banco pede sua senha por telefone ou WhatsApp!</p>
+            <div class="pt-2">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="accessible-btn bg-blue-800 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-2xl border border-blue-600">
+                    <i class="fa-solid fa-arrow-up mr-2"></i> Voltar ao Topo da Página
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Telefones Úteis -->
+    <div id="help-modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 space-y-6 shadow-2xl border-4 border-blue-900 text-slate-900">
+            <div class="flex justify-between items-center border-b pb-4">
+                <h3 id="modal-title" class="heading-lg font-black text-blue-950">Telefones Úteis e Importantes</h3>
+                <button onclick="closeHelpModal()" class="accessible-btn text-slate-500 hover:text-slate-800 text-3xl font-bold p-2" aria-label="Fechar janela de ajuda">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="p-4 bg-slate-100 rounded-2xl">
+                    <p class="font-black text-blue-900 text-xl">Polícia Militar</p>
+                    <p class="text-slate-700">Para emergências de segurança imediatas.</p>
+                    <p class="font-bold text-2xl text-blue-600 mt-1">Ligue 190</p>
+                </div>
+
+                <div class="p-4 bg-slate-100 rounded-2xl">
+                    <p class="font-black text-blue-900 text-xl">Disque Direitos Humanos (Disque 100)</p>
+                    <p class="text-slate-700">Para denúncias de violência financeira ou abusos contra idosos.</p>
+                    <p class="font-bold text-2xl text-blue-600 mt-1">Ligue 100</p>
+                </div>
+
+                <div class="p-4 bg-slate-100 rounded-2xl">
+                    <p class="font-black text-blue-900 text-xl">Central do Banco Central</p>
+                    <p class="text-slate-700">Para informações sobre instituições financeiras e reclamações.</p>
+                    <p class="font-bold text-2xl text-blue-600 mt-1">Ligue 145</p>
+                </div>
+            </div>
+
+            <button onclick="closeHelpModal()" class="w-full accessible-btn bg-blue-900 hover:bg-blue-950 text-white font-extrabold text-xl py-4 rounded-2xl">
+                Fechar Janela
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Base de dados de dicas de segurança com foco no público idoso
+        const tipsData = [
+            {
+                id: 1,
+                category: 'whatsapp',
+                title: 'Golpe do WhatsApp: "Mudei de número, me manda um Pix?"',
+                summary: 'Alguém usando a foto do seu filho ou neto pede dinheiro dizendo que trocou de celular.',
+                details: 'O que fazer: NUNCA envie dinheiro imediatamente! Ligue para o número ANTIGO do seu familiar ou peça para ele mandar um áudio confirmando a voz antes de qualquer coisa.',
+                badgeColor: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+                icon: 'fa-brands fa-whatsapp'
+            },
+            {
+                id: 2,
+                category: 'pix',
+                title: 'Pix Falso ou "Erro no Pagamento"',
+                summary: 'Ligações dizendo que fizeram um Pix errado para você e pedem que devolva o valor.',
+                details: 'O que fazer: Abra o aplicativo do SEU BANCO e confira o extrato. Só devolva usando a opção "Devolver" dentro do próprio aplicativo do banco, nunca transferindo para outra chave diferente.',
+                badgeColor: 'bg-teal-100 text-teal-900 border-teal-300',
+                icon: 'fa-solid fa-money-bill-transfer'
+            },
+            {
+                id: 3,
+                category: 'senhas',
+                title: 'Como criar e guardar Senhas Seguras',
+                summary: 'Evite usar data de nascimento, nome de netos ou sequências como 123456.',
+                details: 'O que fazer: Crie senhas misturando uma palavra simples com números e símbolos. Exemplo: "CafeComBolo@2024". Anote suas senhas em um caderno físico guardado em casa em local seguro, NUNCA no celular.',
+                badgeColor: 'bg-purple-100 text-purple-900 border-purple-300',
+                icon: 'fa-solid fa-key'
+            },
+            {
+                id: 4,
+                category: 'compras',
+                title: 'Cuidado com Ofertas "Boas Demais para ser Verdade"',
+                summary: 'Anúncios na internet vendendo produtos muito baratos (ex: TV grande por R$ 200).',
+                details: 'O que fazer: Desconfie! Lojas conhecidas não dão descontos exagerados. Peça ajuda a um familiar para verificar se o site é verdadeiro antes de digitar os dados do seu cartão de crédito.',
+                badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
+                icon: 'fa-solid fa-cart-shopping'
+            },
+            {
+                id: 5,
+                category: 'whatsapp',
+                title: 'Códigos recebidos por SMS (Não passe para ninguém!)',
+                summary: 'Chega um SMS com 6 números e alguém liga pedindo esse código.',
+                details: 'O que fazer: NUNCA diga esses números para ninguém por ligação ou mensagem. Esse código serve para roubar o acesso da sua conta do WhatsApp.',
+                badgeColor: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+                icon: 'fa-solid fa-comment-sms'
+            },
+            {
+                id: 6,
+                category: 'pix',
+                title: 'Falso Gerente do Banco Ligando',
+                summary: 'Ligação dizendo que sua conta foi invadida e você precisa fazer um Pix de proteção.',
+                details: 'O que fazer: Desligue o telefone na hora! Bancos NUNCA ligam pedindo para você fazer transferências, Pix ou digitar senhas no teclado do telefone.',
+                badgeColor: 'bg-teal-100 text-teal-900 border-teal-300',
+                icon: 'fa-solid fa-phone-slash'
+            }
+        ];
+
+        // Perguntas do Quiz Simulador
+        const quizQuestions = [
+            {
+                question: 'Você recebe uma mensagem no WhatsApp de um número desconhecido com a foto da sua filha pedindo R$ 500 para pagar uma conta urgente. O que você faz?',
+                options: [
+                    { text: 'Mando o dinheiro rapidamente para ajudar logo.', correct: false, explanation: 'Incorreto! Golpistas pegam fotos de redes sociais para se passar por parentes.' },
+                    { text: 'Ligo para o número antigo/habitual da minha filha para confirmar se é verdade.', correct: true, explanation: 'Excelente! Sempre confirme por ligação ou voz antes de transferir qualquer valor.' }
+                ]
+            },
+            {
+                question: 'Um homem liga dizendo ser do seu banco e pede para você confirmar sua senha numérica para cancelar uma compra suspeita. O que fazer?',
+                options: [
+                    { text: 'Desligo o telefone imediatamente.', correct: true, explanation: 'Correto! Nenhum banco pede sua senha por ligação de telefone.' },
+                    { text: 'Falo a senha bem baixinho para ninguém ouvir.', correct: false, explanation: 'Incorreto! O banco jamais solicita sua senha. É um golpe!' }
+                ]
+            }
+        ];
+
+        // Estado da Aplicação
+        let fontSizeLevel = 2; // 1: Normal, 2: Grande, 3: Muito Grande, 4: Gigante
+        let currentCategory = 'todos';
+        let currentQuizIndex = 0;
+        let speechUtterance = null;
+
+        function changeFontSize(direction) {
+            fontSizeLevel = Math.max(1, Math.min(4, fontSizeLevel + direction));
+            const body = document.getElementById('app-body');
+            body.className = body.className.replace(/text-size-\d/g, '');
+            body.classList.add(`text-size-${fontSizeLevel}`);
+
+            const labels = { 1: 'Normal', 2: 'Grande', 3: 'Muito Grande', 4: 'Gigante' };
+            document.getElementById('font-size-label').textContent = labels[fontSizeLevel];
+        }
+
+        function toggleTheme(theme) {
+            const body = document.getElementById('app-body');
+            body.classList.remove('theme-dark', 'theme-contrast');
+
+            if (theme === 'dark') {
+                body.classList.add('theme-dark');
+            } else if (theme === 'contrast') {
+                body.classList.add('theme-contrast');
+            }
+        }
+
+        function speakText(text) {
+            stopSpeech();
+
+            if ('speechSynthesis' in window) {
+                speechUtterance = new SpeechSynthesisUtterance(text);
+                speechUtterance.lang = 'pt-BR';
+                speechUtterance.rate = 0.85; // Leitura um pouco mais pausada para melhor compreensão
+
+                document.getElementById('stop-speech-btn').classList.remove('hidden');
+
+                speechUtterance.onend = function() {
+                    document.getElementById('stop-speech-btn').classList.add('hidden');
+                };
+
+                speechUtterance.onerror = function() {
+                    document.getElementById('stop-speech-btn').classList.add('hidden');
+                };
+
+                window.speechSynthesis.speak(speechUtterance);
+            } else {
+                alert('Seu navegador não suporta leitura de áudio.');
+            }
+        }
+
+        function stopSpeech() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                document.getElementById('stop-speech-btn').classList.add('hidden');
+            }
+        }
+
+        function renderTips() {
+            const container = document.getElementById('tips-container');
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
+
+            const filtered = tipsData.filter(tip => {
+                const matchesCategory = currentCategory === 'todos' || tip.category === currentCategory;
+                const matchesSearch = tip.title.toLowerCase().includes(searchValue) || 
+                                      tip.summary.toLowerCase().includes(searchValue) ||
+                                      tip.details.toLowerCase().includes(searchValue);
+                return matchesCategory && matchesSearch;
+            });
+
+            document.getElementById('tips-count').textContent = `Mostrando ${filtered.length} de ${tipsData.length}`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-card bg-white p-8 rounded-3xl text-center space-y-3 border-2 border-slate-300">
+                        <i class="fa-solid fa-magnifying-glass text-4xl text-slate-400"></i>
+                        <p class="font-bold text-xl text-slate-700">Nenhuma dica encontrada para essa busca.</p>
+                        <button onclick="resetFilters()" class="accessible-btn bg-blue-900 text-white font-bold px-6 py-3 rounded-2xl">
+                            Mostrar Todas as Dicas
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(tip => `
+                <article class="bg-card bg-white rounded-3xl p-6 shadow-md border-2 border-slate-200 flex flex-col justify-between space-y-4 hover:border-blue-400 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold border ${tip.badgeColor}">
+                                <i class="${tip.icon}"></i> ${getCategoryLabel(tip.category)}
+                            </span>
+                        </div>
+                        
+                        <h3 class="heading-lg font-bold text-blue-950">${tip.title}</h3>
+                        <p class="text-slate-700 font-semibold leading-relaxed">${tip.summary}</p>
+                        
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-slate-800 space-y-2">
+                            <p class="font-extrabold text-blue-900"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Dica de Ouro:</p>
+                            <p class="text-base leading-relaxed">${tip.details}</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="speakText('${tip.title}. ${tip.summary}. ${tip.details}')" class="w-full accessible-btn bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold px-4 py-3 rounded-2xl gap-2 border border-slate-300">
+                            <i class="fa-solid fa-volume-high text-blue-600 text-xl"></i> Ouvir Esta Dica
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function getCategoryLabel(cat) {
+            const labels = {
+                whatsapp: 'WhatsApp & Redes',
+                pix: 'Pix & Bancos',
+                senhas: 'Senhas Seguras',
+                compras: 'Compras Online'
+            };
+            return labels[cat] || 'Geral';
+        }
+
+        function selectCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.classList.add('bg-blue-900', 'text-white', 'border-blue-900');
+                    btn.classList.remove('bg-white', 'text-slate-800');
+                } else {
+                    btn.classList.remove('bg-blue-900', 'text-white', 'border-blue-900');
+                    btn.classList.add('bg-white', 'text-slate-800');
+                }
+            });
+            renderTips();
+        }
+
+        function filterTips() {
+            renderTips();
+        }
+
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            selectCategory('todos');
+        }
+
+        function renderQuiz() {
+            const box = document.getElementById('quiz-box');
+            const q = quizQuestions[currentQuizIndex];
+
+            box.innerHTML = `
+                <div class="space-y-4">
+                    <span class="text-sm font-black text-amber-800 bg-amber-200 px-3 py-1 rounded-full">
+                        Pergunta ${currentQuizIndex + 1} de ${quizQuestions.length}
+                    </span>
+                    <h3 class="heading-lg font-bold text-slate-900 leading-snug">${q.question}</h3>
+
+                    <div class="space-y-3 pt-2">
+                        ${q.options.map((opt, idx) => `
+                            <button onclick="checkAnswer(${idx})" class="w-full accessible-btn text-left p-4 rounded-2xl border-2 border-slate-300 bg-slate-50 hover:bg-amber-100 hover:border-amber-400 font-semibold text-slate-900 justify-start">
+                                <span class="bg-white border-2 border-slate-400 rounded-full w-8 h-8 inline-flex items-center justify-center font-bold mr-3 text-blue-900 shrink-0">
+                                    ${idx === 0 ? 'A' : 'B'}
+                                </span>
+                                <span>${opt.text}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div id="quiz-feedback" class="hidden p-4 rounded-2xl border-2 space-y-2"></div>
+                </div>
+            `;
+        }
+
+        function checkAnswer(optionIndex) {
+            const q = quizQuestions[currentQuizIndex];
+            const opt = q.options[optionIndex];
+            const feedback = document.getElementById('quiz-feedback');
+
+            feedback.classList.remove('hidden', 'bg-emerald-100', 'border-emerald-400', 'bg-red-100', 'border-red-400');
+
+            if (opt.correct) {
+                feedback.classList.add('bg-emerald-100', 'border-emerald-400');
+                feedback.innerHTML = `
+                    <p class="font-extrabold text-emerald-950 text-xl"><i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> Resposta Correta!</p>
+                    <p class="text-slate-800 font-medium">${opt.explanation}</p>
+                    <button onclick="nextQuestion()" class="mt-2 accessible-btn bg-emerald-700 text-white font-bold px-6 py-2 rounded-xl">
+                        Próxima Pergunta <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                `;
+                speakText("Resposta correta! " + opt.explanation);
+            } else {
+                feedback.classList.add('bg-red-100', 'border-red-400');
+                feedback.innerHTML = `
+                    <p class="font-extrabold text-red-950 text-xl"><i class="fa-solid fa-triangle-exclamation text-red-600 mr-2"></i> Cuidado! Essa opção é perigosa.</p>
+                    <p class="text-slate-800 font-medium">${opt.explanation}</p>
+                `;
+                speakText("Cuidado! Essa opção é perigosa. " + opt.explanation);
+            }
+        }
+
+        function nextQuestion() {
+            currentQuizIndex = (currentQuizIndex + 1) % quizQuestions.length;
+            renderQuiz();
+        }
+
+        function openHelpModal() {
+            document.getElementById('help-modal').classList.remove('hidden');
+        }
+
+        function closeHelpModal() {
+            document.getElementById('help-modal').classList.add('hidden');
+        }
+
+        // Evento de carregamento inicial
+        window.onload = function() {
+            renderTips();
+            renderQuiz();
+        };
+    </script>
+</body>
+</html>

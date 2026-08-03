@@ -1,0 +1,316 @@
+/* STREAMING_CHUNK:Importing typography and setting root variables... */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+:root {
+/* Cores Principais - Tema Claro Padrão */
+--bg-primary: #f8fafc;
+--bg-card: #ffffff;
+--bg-header: #1e3a8a;
+--text-primary: #0f172a;
+--text-secondary: #334155;
+--text-muted: #475569;
+--border-color: #e2e8f0;
+
+/* Cores de Destaque e Acessibilidade */
+--accent-amber: #f59e0b;
+--accent-blue: #1d4ed8;
+--accent-emerald: #059669;
+--accent-red: #dc2626;
+
+/* Transições Suaves */
+--transition-speed: 0.3s;
+--focus-ring-color: #f59e0b;
+}
+
+/* STREAMING_CHUNK:Defining global base resets and layout defaults... */
+*, *::before, *::after {
+box-sizing: border-border-box;
+}
+
+html {
+scroll-behavior: smooth;
+height: 100%;
+}
+
+body {
+font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+background-color: var(--bg-primary);
+color: var(--text-primary);
+margin: 0;
+padding: 0;
+min-height: 100%;
+line-height: 1.6;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* STREAMING_CHUNK:Configuring dynamic text size accessibility tiers... /
+/ Tamanho de Fonte Nível 1 - Normal */
+.text-size-1 { font-size: 1rem; }
+.text-size-1 .heading-xl { font-size: 2rem; line-height: 1.25; }
+.text-size-1 .heading-lg { font-size: 1.5rem; line-height: 1.3; }
+
+/* Tamanho de Fonte Nível 2 - Grande (Padrão para Seniores) */
+.text-size-2 { font-size: 1.25rem; }
+.text-size-2 .heading-xl { font-size: 2.25rem; line-height: 1.2; }
+.text-size-2 .heading-lg { font-size: 1.75rem; line-height: 1.25; }
+
+/* Tamanho de Fonte Nível 3 - Muito Grande */
+.text-size-3 { font-size: 1.5rem; }
+.text-size-3 .heading-xl { font-size: 2.75rem; line-height: 1.15; }
+.text-size-3 .heading-lg { font-size: 2rem; line-height: 1.2; }
+
+/* Tamanho de Fonte Nível 4 - Gigante */
+.text-size-4 { font-size: 1.75rem; }
+.text-size-4 .heading-xl { font-size: 3.25rem; line-height: 1.1; }
+.text-size-4 .heading-lg { font-size: 2.25rem; line-height: 1.15; }
+
+/* STREAMING_CHUNK:Establishing accessible focus indicators and touch targets... /
+/ Indicador Visível de Foco para Navegação por Teclado */
+*:focus-visible {
+outline: 4px solid var(--focus-ring-color) !important;
+outline-offset: 4px !important;
+border-radius: 8px;
+}
+
+/* Botões Acessíveis com Área de Toque Expandida */
+.accessible-btn {
+min-height: 56px;
+min-width: 56px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+user-select: none;
+touch-action: manipulation;
+transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.accessible-btn:hover {
+transform: translateY(-2px);
+filter: brightness(1.05);
+}
+
+.accessible-btn:active {
+transform: scale(0.96) translateY(0);
+}
+
+/* STREAMING_CHUNK:Applying High-Contrast accessibility theme styles... /
+/ Estilo de Alto Contraste (Amarelo e Preto) */
+body.theme-contrast {
+background-color: #000000 !important;
+color: #ffff00 !important;
+}
+
+body.theme-contrast .bg-card,
+body.theme-contrast section,
+body.theme-contrast article,
+body.theme-contrast header,
+body.theme-contrast footer,
+body.theme-contrast input,
+body.theme-contrast #quiz-box {
+background-color: #121212 !important;
+border: 3px solid #ffff00 !important;
+color: #ffff00 !important;
+box-shadow: none !important;
+}
+
+body.theme-contrast input::placeholder {
+color: #ffffff !important;
+opacity: 0.9;
+}
+
+body.theme-contrast button,
+body.theme-contrast a.accessible-btn {
+background-color: #000000 !important;
+color: #ffff00 !important;
+border: 3px solid #ffff00 !important;
+}
+
+body.theme-contrast button:hover,
+body.theme-contrast a.accessible-btn:hover {
+background-color: #ffff00 !important;
+color: #000000 !important;
+}
+
+body.theme-contrast .text-muted,
+body.theme-contrast p,
+body.theme-contrast span,
+body.theme-contrast label,
+body.theme-contrast h1,
+body.theme-contrast h2,
+body.theme-contrast h3,
+body.theme-contrast i {
+color: #ffff00 !important;
+}
+
+body.theme-contrast *:focus-visible {
+outline: 5px solid #ffffff !important;
+outline-offset: 5px !important;
+}
+
+/* STREAMING_CHUNK:Applying Dark Mode theme styles... /
+/ Estilo Modo Escuro Padrão */
+body.theme-dark {
+background-color: #0f172a !important;
+color: #f8fafc !important;
+}
+
+body.theme-dark .bg-card,
+body.theme-dark section,
+body.theme-dark article,
+body.theme-dark #quiz-box {
+background-color: #1e293b !important;
+border-color: #334155 !important;
+color: #f8fafc !important;
+}
+
+body.theme-dark input {
+background-color: #0f172a !important;
+color: #ffffff !important;
+border-color: #475569 !important;
+}
+
+body.theme-dark input::placeholder {
+color: #94a3b8 !important;
+}
+
+body.theme-dark .text-muted,
+body.theme-dark p.text-slate-700,
+body.theme-dark p.text-slate-800 {
+color: #cbd5e1 !important;
+}
+
+body.theme-dark .heading-xl,
+body.theme-dark .heading-lg,
+body.theme-dark h1,
+body.theme-dark h2,
+body.theme-dark h3 {
+color: #f1f5f9 !important;
+}
+
+body.theme-dark .bg-slate-50,
+body.theme-dark .bg-slate-100 {
+background-color: #0f172a !important;
+border-color: #334155 !important;
+color: #f8fafc !important;
+}
+
+/* STREAMING_CHUNK:Styling custom components cards and badges... /
+/ Cartões com sombras suaves e bordas destacadas */
+.bg-card {
+transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow 0.2s ease;
+}
+
+.bg-card:hover {
+box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Emblemas / Badges de Categoria /
+span[class="badge"], .inline-flex {
+letter-spacing: 0.02em;
+}
+
+/* Lista numerada da seção de emergência */
+ol.list-decimal li {
+margin-bottom: 0.5rem;
+}
+
+/* STREAMING_CHUNK:Configuring form inputs search bars and controls... /
+/ Campo de Busca Otimizado para Leitura */
+input[type="text"] {
+outline: none;
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus {
+border-color: #f59e0b !important;
+box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.25) !important;
+}
+
+/* STREAMING_CHUNK:Designing modal dialogs overlay and interactive feedback... /
+/ Modal de Telefones de Emergência */
+#help-modal {
+transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#help-modal:not(.hidden) {
+display: flex !important;
+animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Feedback do Quiz Interativo */
+#quiz-feedback {
+transition: all 0.3s ease;
+}
+
+/* STREAMING_CHUNK:Adding keyframe animations and interactive transitions... /
+/ Animação de Entrada e Pulsos */
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: scale(0.97);
+}
+to {
+opacity: 1;
+transform: scale(1);
+}
+}
+
+@keyframes pulseBorder {
+0%, 100% {
+border-color: rgba(220, 38, 38, 1);
+}
+50% {
+border-color: rgba(220, 38, 38, 0.4);
+}
+}
+
+.animate-pulse-border {
+animation: pulseBorder 2s infinite;
+}
+
+/* STREAMING_CHUNK:Customizing scrollbars and print optimization styles... /
+/ Barra de Rolagem Personalizada e Visível */
+::-webkit-scrollbar {
+width: 12px;
+height: 12px;
+}
+
+::-webkit-scrollbar-track {
+background: #f1f5f9;
+}
+
+body.theme-dark ::-webkit-scrollbar-track {
+background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+background: #94a3b8;
+border-radius: 6px;
+border: 3px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #64748b;
+}
+
+/* Estilos de Impressão */
+@media print {
+header, footer, button, #search-input, #category-buttons, #simulador {
+display: none !important;
+}
+
+body {
+background-color: #ffffff !important;
+color: #000000 !important;
+font-size: 14pt !important;
+}
+
+.bg-card {
+border: 1px solid #000000 !important;
+box-shadow: none !important;
+page-break-inside: avoid;
+}
+}
